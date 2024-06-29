@@ -9,6 +9,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
 import pickle
+import os
 
 app = Flask(__name__)
 
@@ -24,6 +25,10 @@ loaded_final_rf_model = saved_data['final_rf_model']
 loaded_symptom_index = saved_data['symptom_index']
 loaded_predictions_classes = saved_data['predictions_classes']
 
+current_dir = os.path.abspath('.')
+
+# Initialize the Flask app with the current directory as the template folder
+app = Flask(__name__, template_folder=current_dir)
 @app.route('/')
 def index():
     return render_template("index.html")
